@@ -77,11 +77,35 @@ target_compile_definitions(rootlib INTERFACE ${DEFINES})
 
 add_subdirectory(${CMAKE_SOURCE_DIR}/LL_Drivers)
 add_subdirectory(${CMAKE_SOURCE_DIR}/CMSIS)
+add_subdirectory(${CMAKE_SOURCE_DIR}/Rtos)
 
 target_link_libraries(${PROJECT_NAME}.elf
     CMSIS
     LL_Drivers
+    Rtos
 )
+
+add_library(freertos_config INTERFACE)
+target_include_directories(freertos_config SYSTEM
+    INTERFACE
+        ${CMAKE_SOURCE_DIR}/core/inc)
+target_compile_definitions(freertos_config
+    INTERFACE
+        projCOVERAGE_TEST=0
+)
+
+set( FREERTOS_HEAP "4" CACHE STRING "" FORCE)
+# Select the cross-compile PORT
+set(FREERTOS_PORT "GCC_ARM_CM7" CACHE STRING "" FORCE)
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/FreeRTOS-Kernel)
+
+target_link_libraries(${PROJECT_NAME}.elf
+    freertos_kernel
+)
+
+target_compile_definitions(freertos_config INTERFACE ${definitions})
+target_compile_options(freertos_config INTERFACE ${options})
 
 set(HEX_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.hex)
 set(BIN_FILE ${PROJECT_BINARY_DIR}/${PROJECT_NAME}.bin)
