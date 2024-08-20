@@ -172,26 +172,25 @@ swap_bytes(uint8_t *s, int32_t l) {
 }
 
 void 
-st7796_draw(uint8_t* pixels, uint16_t x, uint16_t y, uint16_t w, uint16_t h) {
-	uint16_t yEnd = y+h-1;
+st7796_draw(uint8_t* pixels, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) {
 	LL_GPIO_ResetOutputPin(CS_GPIO_Port, CS_Pin);
 	writecommand(0x2A);
-	writedata(x>>8);
-	writedata(0x00FF&x);
-	writedata((w+x-1)>>8);
-	writedata(0x00FF&(w+x-1));
+	writedata(x1>>8);
+	writedata(0x00FF&x1);
+	writedata(x2>>8);
+	writedata(0x00FF&x2);
 
 	writecommand(0x2B);
-	writedata(y>>8);
-	writedata(0x00FF&y);
-	writedata(yEnd>>8);
-	writedata(0x00FF&yEnd);
+	writedata(y1>>8);
+	writedata(0x00FF&y1);
+	writedata(y2>>8);
+	writedata(0x00FF&y2);
 
 	writecommand(0x2C);
 
 	LL_GPIO_SetOutputPin(DC_GPIO_Port, DC_Pin);
-	swap_bytes(pixels,w*h*2);
-	st7796_send_multiple_data(pixels, w*h*2);
+	swap_bytes(pixels,(x2-x1+1)*(y2-y1+1)*2);
+	st7796_send_multiple_data(pixels, (x2-x1+1)*(y2-y1+1)*2);
 	LL_GPIO_ResetOutputPin(DC_GPIO_Port, DC_Pin);
 
 	vTaskDelay(1);

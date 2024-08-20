@@ -8,7 +8,7 @@ extern "C" {
 #include <stdint.h>
 
 void st7796_init();
-void st7796_draw(uint8_t* pixels, uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+void st7796_draw(uint8_t* pixels, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 
 #ifdef __cplusplus
 }
