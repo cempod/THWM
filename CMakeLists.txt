@@ -79,12 +79,14 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/LL_Drivers)
 add_subdirectory(${CMAKE_SOURCE_DIR}/CMSIS)
 add_subdirectory(${CMAKE_SOURCE_DIR}/Rtos)
 add_subdirectory(${CMAKE_SOURCE_DIR}/st7796)
+add_subdirectory(${CMAKE_SOURCE_DIR}/lvgl)
 
 target_link_libraries(${PROJECT_NAME}.elf
     CMSIS
     LL_Drivers
     Rtos
     st7796
+    lvgl
 )
 
 add_library(freertos_config INTERFACE)
