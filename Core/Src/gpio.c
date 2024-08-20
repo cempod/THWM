@@ -15,8 +15,6 @@ gpio_init(void) {
     LL_GPIO_Init(LED_GPIO_Port, &gpio_init);
 
     LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOA);
-    gpio_init.Pin = RST_Pin | CS_Pin | DC_Pin | BLK_Pin;
+    gpio_init.Pin = RST_Pin | CS_Pin | DC_Pin;
     LL_GPIO_Init(GPIOA, &gpio_init);
-
-    LL_GPIO_SetOutputPin(BLK_GPIO_Port, BLK_Pin);
 }

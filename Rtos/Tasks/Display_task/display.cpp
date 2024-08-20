@@ -11,6 +11,7 @@ vApplicationTickHook(void) {
 void
 display_task(void* arg) {
     st7796_init();
+    xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
         LL_GPIO_TogglePin(GPIOE, LL_GPIO_PIN_3);
         vTaskDelay(pdMS_TO_TICKS(500));
