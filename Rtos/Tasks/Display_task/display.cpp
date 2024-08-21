@@ -17,7 +17,7 @@ display_task(void* arg) {
     lv_init();
 
     lv_display_t *display = lv_display_create(480, 320);
-    static lv_color_t buf1[480 * 320 / 10];                      /*Declare a buffer for 1/10 screen size*/
+    __attribute__((section(".DTCMRAM_section"))) static lv_color_t buf1[480 * 320 / 4];                      /*Declare a buffer for 1/10 screen size*/
     lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);  /*Initialize the display buffer.*/
     lv_display_set_flush_cb(display, my_disp_flush);
 
