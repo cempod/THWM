@@ -3,6 +3,7 @@
 #include "stm32h7xx_ll_gpio.h"
 #include "st7796.h"
 #include "lvgl/lvgl.h"
+#include "main_page.hpp"
 
 void my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p);
 
@@ -17,12 +18,12 @@ display_task(void* arg) {
     lv_init();
 
     lv_display_t *display = lv_display_create(480, 320);
-    __attribute__((section(".DTCMRAM_section"))) static lv_color_t buf1[480 * 320 / 4];                      /*Declare a buffer for 1/10 screen size*/
-    lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);  /*Initialize the display buffer.*/
+    __attribute__((section(".DTCMRAM_section"))) static lv_color_t buf1[480 * 320 / 4];               
+    lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(display, my_disp_flush);
 
-    lv_obj_set_style_bg_color ( lv_screen_active() , lv_palette_darken(LV_PALETTE_GREY,4),0) ;
-    lv_obj_set_scrollbar_mode(lv_screen_active(), LV_SCROLLBAR_MODE_OFF);
+    MainPage main_page;
+    main_page.load();
 
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
