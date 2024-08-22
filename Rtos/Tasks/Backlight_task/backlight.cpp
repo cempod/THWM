@@ -35,9 +35,9 @@ backlight_task(void* arg) {
             }
             set_pwm(current_brightness);
         }
-        if (need_some_sleep(xTaskGetTickCount(), last_tick)) {
+        /*if (need_some_sleep(xTaskGetTickCount(), last_tick)) {
             target_brightness = 0;
-        }
+        }*/
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }
