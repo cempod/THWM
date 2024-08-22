@@ -5,6 +5,8 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/display.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/backlight.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/main_page.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
 )
 
 add_library(Rtos INTERFACE)
@@ -14,6 +16,7 @@ target_include_directories(Rtos INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects
     rootlib
 )
 target_compile_definitions(Rtos INTERFACE rootlib)
