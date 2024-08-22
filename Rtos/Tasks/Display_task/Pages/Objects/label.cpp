@@ -9,7 +9,7 @@ Label::Label(int x_offset, int y_offset, const lv_font_t * font, lv_obj_t * parr
     lv_obj_set_width(label, LV_SIZE_CONTENT); 
     lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
     lv_obj_align(label, LV_ALIGN_CENTER, x_offset, y_offset);
-    lv_obj_set_style_text_color(label,lv_palette_main(LV_PALETTE_CYAN),0); 
+    lv_obj_set_style_text_color(label,lv_palette_lighten(LV_PALETTE_CYAN, 1),0); 
     lv_obj_set_style_text_font(label,font,0);
 }
 
