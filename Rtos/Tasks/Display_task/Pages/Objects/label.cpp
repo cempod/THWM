@@ -20,3 +20,8 @@ Label::set_text(const char* msg, ...) {
     va_end(ap);
     lv_label_set_text(label, str);
 }
+
+void 
+Label::set_color(lv_color_t color){
+    lv_obj_set_style_text_color(label, color, 0);
+}

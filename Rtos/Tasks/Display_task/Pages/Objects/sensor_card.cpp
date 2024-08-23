@@ -20,4 +20,5 @@ void
 SensorCard::set_colors(ui_style_t colors) {
     lv_obj_set_style_bg_color(card, colors.card_background_color, 0);
     lv_obj_set_style_bg_color (header , colors.header_color, 0);
+    top_label_p->set_color(colors.header_font_color);
 }
