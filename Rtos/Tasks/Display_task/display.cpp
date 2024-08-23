@@ -2,7 +2,6 @@
 #include "rtos.h"
 #include "stm32h7xx_ll_gpio.h"
 #include "st7796.h"
-#include "lvgl/lvgl.h"
 #include "main_page.hpp"
 
 void my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p);
