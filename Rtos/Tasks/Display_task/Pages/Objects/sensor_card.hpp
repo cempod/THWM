@@ -9,6 +9,6 @@ private:
     lv_obj_t * header;
     Label * top_label_p;
 public:
-    SensorCard(int x_offset, int y_offset, lv_obj_t * parrent);
+    SensorCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent);
 };
 

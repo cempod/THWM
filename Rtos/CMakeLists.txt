@@ -6,6 +6,7 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/backlight.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/main_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/calendar_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
 )
 
