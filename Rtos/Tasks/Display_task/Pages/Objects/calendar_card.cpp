@@ -23,8 +23,9 @@ draw_task_added_event_cb(lv_event_t * e)
 
     lv_draw_fill_dsc_t * fill_draw_dsc = lv_draw_task_get_fill_dsc(draw_task);
     lv_draw_border_dsc_t * border_draw_dsc = lv_draw_task_get_border_dsc(draw_task);
+    lv_draw_label_dsc_t * label_draw_dsc = lv_draw_task_get_label_dsc(draw_task);
 
-    if(!fill_draw_dsc && !border_draw_dsc) {
+    if(!fill_draw_dsc && !border_draw_dsc && !label_draw_dsc) {
         return;
     }
 
@@ -34,6 +35,8 @@ draw_task_added_event_cb(lv_event_t * e)
     if(id < 7) {
         if(fill_draw_dsc) fill_draw_dsc->opa = LV_OPA_TRANSP;
         if(border_draw_dsc) border_draw_dsc->opa = LV_OPA_TRANSP;
+        if(label_draw_dsc)  label_draw_dsc->opa = LV_OPA_COVER;
+        if(label_draw_dsc)  label_draw_dsc->color = ui_color->header_color;
     }
     else if(lv_buttonmatrix_has_button_ctrl(obj, id, LV_BUTTONMATRIX_CTRL_DISABLED)) {
         if(fill_draw_dsc) fill_draw_dsc->opa = LV_OPA_TRANSP;
@@ -52,13 +55,14 @@ draw_task_added_event_cb(lv_event_t * e)
     if(lv_buttonmatrix_has_button_ctrl(obj, id, LV_BUTTONMATRIX_CTRL_CUSTOM_1)) { //today
         if(border_draw_dsc) border_draw_dsc->opa = LV_OPA_COVER;
         if(border_draw_dsc) border_draw_dsc->color = ui_color->header_color;
-        if(border_draw_dsc) border_draw_dsc->width += 1;
+        //if(border_draw_dsc) border_draw_dsc->width += 1;
+        if(label_draw_dsc)  label_draw_dsc->opa = LV_OPA_COVER;
+        if(label_draw_dsc)  label_draw_dsc->color = ui_color->header_color;
     }
 }
 
 void 
 CalendarCard::set_colors(ui_style_t colors) {
     calendar_theme = colors;
-    lv_obj_set_style_bg_color(calendar, colors.card_background_color, LV_PART_ANY);
     lv_obj_add_event_cb(lv_calendar_get_btnmatrix(calendar), draw_task_added_event_cb, LV_EVENT_DRAW_TASK_ADDED, (void *)&calendar_theme);
 }
