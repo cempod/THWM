@@ -18,7 +18,7 @@ Label::set_text(const char* msg, ...) {
     va_start(ap, msg);
     vsprintf(str, msg, ap);
     va_end(ap);
-    lv_label_set_text(label, msg);
+    lv_label_set_text(label, str);
 }
 
 void 
