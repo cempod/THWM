@@ -80,10 +80,5 @@ draw_task_event_cb(lv_event_t * e)
 
 void 
 CalendarCard::set_colors(ui_style_t colors) {
-    calendar_theme.background_color = colors.background_color;
-    calendar_theme.border_color = colors.border_color;
-    calendar_theme.card_background_color = colors.card_background_color;
-    calendar_theme.header_color = colors.header_color;
-    calendar_theme.header_font_color = colors.header_font_color;
-    calendar_theme.main_font_color = colors.main_font_color;
+    calendar_theme = colors;
 }
