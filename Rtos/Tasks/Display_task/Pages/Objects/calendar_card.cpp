@@ -9,9 +9,6 @@ CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, l
     lv_obj_set_size(calendar, x_size, y_size);
     lv_obj_align(calendar, LV_ALIGN_CENTER, 0, 0);    
     lv_obj_align(calendar, LV_ALIGN_TOP_LEFT, x_offset, y_offset);
-
-    lv_calendar_set_today_date(calendar, 2024, 8, 23);
-    lv_calendar_set_showed_date(calendar, 2024, 8);
     remove_events(lv_calendar_get_btnmatrix(calendar));
     lv_obj_add_event_cb(lv_calendar_get_btnmatrix(calendar), draw_task_event_cb, LV_EVENT_DRAW_TASK_ADDED, &calendar_theme);
 }
@@ -81,4 +78,10 @@ draw_task_event_cb(lv_event_t * e)
 void 
 CalendarCard::set_colors(ui_style_t colors) {
     calendar_theme = colors;
+}
+
+void 
+CalendarCard::set_date(uint32_t day, uint32_t month, uint32_t year) {
+    lv_calendar_set_today_date(calendar, year, month, day);
+    lv_calendar_set_showed_date(calendar, year, month);
 }

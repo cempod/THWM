@@ -11,6 +11,7 @@ MainPage::MainPage() {
     co2_card_p = new SensorCard(150, 100, 325, 215, screen);
     co2_card_p->set_label("CO2");
     calendar_p = new CalendarCard(310, 150, 165, 55, screen);
+    calendar_p->set_date(26, 8, 2024);
 }
 
 void 
