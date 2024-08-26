@@ -1,6 +1,9 @@
 #include "calendar_card.hpp"
 
+static void draw_task_event_cb(lv_event_t * e);
+
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
+    set_colors(light_theme); 
     calendar = lv_calendar_create(parrent);
     lv_obj_set_size(calendar, x_size, y_size);
     lv_obj_align(calendar, LV_ALIGN_CENTER, 0, 0);    
@@ -8,12 +11,12 @@ CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, l
 
     lv_calendar_set_today_date(calendar, 2024, 8, 23);
     lv_calendar_set_showed_date(calendar, 2024, 8);
-    calendar_theme = light_theme;
-    set_colors(calendar_theme);
+       
+    lv_obj_add_event_cb(lv_calendar_get_btnmatrix(calendar), draw_task_event_cb, LV_EVENT_DRAW_TASK_ADDED, &calendar_theme);
 }
 
 static void 
-draw_task_added_event_cb(lv_event_t * e)
+draw_task_event_cb(lv_event_t * e)
 {
     lv_obj_t * obj = (lv_obj_t *)lv_event_get_current_target(e);
     lv_draw_task_t * draw_task = (lv_draw_task_t *)lv_event_get_param(e);
@@ -55,7 +58,6 @@ draw_task_added_event_cb(lv_event_t * e)
     if(lv_buttonmatrix_has_button_ctrl(obj, id, LV_BUTTONMATRIX_CTRL_CUSTOM_1)) { //today
         if(border_draw_dsc) border_draw_dsc->opa = LV_OPA_COVER;
         if(border_draw_dsc) border_draw_dsc->color = ui_color->header_color;
-        //if(border_draw_dsc) border_draw_dsc->width += 1;
         if(label_draw_dsc)  label_draw_dsc->opa = LV_OPA_COVER;
         if(label_draw_dsc)  label_draw_dsc->color = ui_color->header_color;
     }
@@ -63,6 +65,10 @@ draw_task_added_event_cb(lv_event_t * e)
 
 void 
 CalendarCard::set_colors(ui_style_t colors) {
-    calendar_theme = colors;
-    lv_obj_add_event_cb(lv_calendar_get_btnmatrix(calendar), draw_task_added_event_cb, LV_EVENT_DRAW_TASK_ADDED, (void *)&calendar_theme);
+    calendar_theme.background_color = colors.background_color;
+    calendar_theme.border_color = colors.border_color;
+    calendar_theme.card_background_color = colors.card_background_color;
+    calendar_theme.header_color = colors.header_color;
+    calendar_theme.header_font_color = colors.header_font_color;
+    calendar_theme.main_font_color = colors.main_font_color;
 }
