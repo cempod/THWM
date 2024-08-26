@@ -25,3 +25,8 @@ void
 Label::set_color(lv_color_t color){
     lv_obj_set_style_text_color(label, color, 0);
 }
+
+void 
+Label::set_font(const lv_font_t * font){
+    lv_obj_set_style_text_font(label, font, 0);
+}
