@@ -1,6 +1,7 @@
 #include "calendar_card.hpp"
 
 static void draw_task_event_cb(lv_event_t * e);
+static void remove_events(lv_obj_t * obj);
 
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
     set_colors(light_theme); 
@@ -11,8 +12,22 @@ CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, l
 
     lv_calendar_set_today_date(calendar, 2024, 8, 23);
     lv_calendar_set_showed_date(calendar, 2024, 8);
-       
+    remove_events(lv_calendar_get_btnmatrix(calendar));
     lv_obj_add_event_cb(lv_calendar_get_btnmatrix(calendar), draw_task_event_cb, LV_EVENT_DRAW_TASK_ADDED, &calendar_theme);
+}
+
+static void
+remove_events(lv_obj_t * obj) {
+    uint32_t i;
+    uint32_t event_cnt = lv_obj_get_event_count(obj);
+    for (i = 0; i < event_cnt; i++) {
+        lv_event_dsc_t * event_dsc = lv_obj_get_event_dsc(obj, i);
+        if(lv_event_dsc_get_cb(event_dsc)) {
+            //lv_obj_remove_event(obj, i);
+            lv_obj_remove_event_cb(obj, lv_event_dsc_get_cb(event_dsc));
+            break;
+        }
+    }
 }
 
 static void 
