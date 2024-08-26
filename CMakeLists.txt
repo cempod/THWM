@@ -56,6 +56,7 @@ include_directories(
 file(GLOB SOURCES
     startup_stm32h723xx.s
     "${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/*.c"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/*.cpp"
 )
 
 
