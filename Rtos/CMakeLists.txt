@@ -8,6 +8,7 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/calendar_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/top_panel.cpp
 )
 
 add_library(Rtos INTERFACE)

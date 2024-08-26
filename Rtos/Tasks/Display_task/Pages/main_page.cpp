@@ -12,6 +12,8 @@ MainPage::MainPage() {
     co2_card_p->set_label("CO2");
     calendar_p = new CalendarCard(310, 150, 165, 55, screen);
     calendar_p->set_date(26, 8, 2024);
+    top_panel_p = new TopPanel(470, 45, 5, 5, screen);
+    top_panel_p->set_time(12, 30);
 }
 
 void 

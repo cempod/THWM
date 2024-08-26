@@ -2,6 +2,7 @@
 #include "lvgl.h"
 #include "sensor_card.hpp"
 #include "calendar_card.hpp"
+#include "top_panel.hpp"
 
 class MainPage
 {
@@ -12,6 +13,7 @@ private:
     SensorCard * humidity_card_p;
     SensorCard * co2_card_p;
     CalendarCard * calendar_p;
+    TopPanel * top_panel_p;
 public:
     MainPage();
     void load(void);
