@@ -7,8 +7,8 @@
 
 void
 rcc_init(void) {
-    SCB_EnableICache();
-    SCB_EnableDCache();
+    //SCB_EnableICache();
+    //SCB_EnableDCache();
     LL_PWR_ConfigSupply(LL_PWR_LDO_SUPPLY);
     LL_PWR_SetRegulVoltageScaling(LL_PWR_REGU_VOLTAGE_SCALE0);
     while (LL_PWR_IsActiveFlag_VOS() == 0) {}
