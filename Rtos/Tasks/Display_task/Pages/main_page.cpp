@@ -25,3 +25,14 @@ void
 MainPage::load(void) {
     lv_screen_load(screen);
 }
+
+void
+MainPage::set_colors(ui_style_t colors) {
+    lv_obj_set_style_bg_color(screen, colors.background_color, 0);
+    temperature_card_p->set_colors(colors);
+    pressure_card_p->set_colors(colors);
+    humidity_card_p->set_colors(colors);
+    co2_card_p->set_colors(colors);
+    calendar_p->set_colors(colors);
+    top_panel_p->set_colors(colors);
+}
