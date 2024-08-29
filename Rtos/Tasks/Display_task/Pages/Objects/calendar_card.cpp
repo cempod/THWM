@@ -4,8 +4,8 @@ static void draw_task_event_cb(lv_event_t * e);
 static void remove_events(lv_obj_t * obj);
 
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
-    set_colors(light_theme); 
     calendar = lv_calendar_create(parrent);
+    set_colors(light_theme); 
     lv_obj_set_size(calendar, x_size, y_size);
     lv_obj_align(calendar, LV_ALIGN_CENTER, 0, 0);    
     lv_obj_align(calendar, LV_ALIGN_TOP_LEFT, x_offset, y_offset);
@@ -70,6 +70,8 @@ draw_task_event_cb(lv_event_t * e)
     if(lv_buttonmatrix_has_button_ctrl(obj, id, LV_BUTTONMATRIX_CTRL_CUSTOM_1)) { //today
         if(border_draw_dsc) border_draw_dsc->opa = LV_OPA_COVER;
         if(border_draw_dsc) border_draw_dsc->color = ui_color->header_color;
+        if(border_draw_dsc) border_draw_dsc->width = 1;
+        if(border_draw_dsc) border_draw_dsc->radius = 5;
         if(label_draw_dsc)  label_draw_dsc->opa = LV_OPA_COVER;
         if(label_draw_dsc)  label_draw_dsc->color = ui_color->header_color;
     }
@@ -78,6 +80,11 @@ draw_task_event_cb(lv_event_t * e)
 void 
 CalendarCard::set_colors(ui_style_t colors) {
     calendar_theme = colors;
+    lv_obj_set_style_bg_color(calendar, colors.card_background_color, 0);
+    lv_obj_set_style_border_color(calendar, colors.border_color, 0);
+    lv_obj_set_style_border_color( lv_calendar_get_btnmatrix(calendar), colors.background_color, LV_PART_ITEMS);
+    lv_obj_set_style_bg_color( lv_calendar_get_btnmatrix(calendar), colors.background_color, LV_PART_ITEMS);
+    lv_obj_set_style_text_color( lv_calendar_get_btnmatrix(calendar), colors.main_font_color, LV_PART_ITEMS);
 }
 
 void 

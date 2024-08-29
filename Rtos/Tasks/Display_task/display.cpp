@@ -23,6 +23,7 @@ display_task(void* arg) {
     lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(display, my_disp_flush);
     MainPage main_page;
+    main_page.set_colors(dark_theme);
     main_page.load();
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {

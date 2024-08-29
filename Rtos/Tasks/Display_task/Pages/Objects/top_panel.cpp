@@ -13,6 +13,7 @@ void
 TopPanel::set_colors(ui_style_t colors) {
     lv_obj_set_style_bg_color(panel, colors.header_color, 0);
     time_label_p->set_color(colors.header_font_color);
+    lv_obj_set_style_border_color(panel, colors.border_color, 0);
 }
 
 void 
