@@ -1,6 +1,6 @@
-# Project
+# THWM
 
-Project Description
+Touch Home Weather Station
 
 <em>[TODO.md spec & Kanban Board](https://bit.ly/3fCwKfM)</em>
 
@@ -13,7 +13,7 @@ Project Description
 
 ### In Progress
 
-- [ ] Перевести заподнения экрана на DMA  
+- [ ] Перевести заполнение экрана на DMA  
 
 ### Done ✓
 
