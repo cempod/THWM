@@ -19,8 +19,8 @@ display_task(void* arg) {
     lv_init();
 
     display = lv_display_create(480, 320);
-    /*__attribute__((section(".DTCMRAM_section"))) */static lv_color_t buf1[480 * 320 / 8];   
-    lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
+    static lv_color_t buf1[480 * 320 / 7], buf2[480 * 320 / 7];   
+    lv_display_set_buffers(display, buf1, buf2, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(display, my_disp_flush);
     MainPage main_page;
     //main_page.set_colors(dark_theme);
