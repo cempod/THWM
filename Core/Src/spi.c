@@ -69,7 +69,7 @@ spi_send_dma(uint8_t * bytes, uint32_t size) {
                             (uint32_t)bytes, (uint32_t) &(SPI1->TXDR),
                             LL_DMA_GetDataTransferDirection(DMA1, LL_DMA_STREAM_7));
 
-    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size+6); //WTF??????
+    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size);
     LL_DMA_SetPeriphRequest(DMA1, LL_DMA_STREAM_7, LL_DMAMUX1_REQ_SPI1_TX);
     LL_SPI_Enable(SPI1);
     while (!LL_SPI_IsActiveFlag_TXP(SPI1)) {}

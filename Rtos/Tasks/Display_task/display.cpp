@@ -19,7 +19,7 @@ display_task(void* arg) {
     lv_init();
 
     display = lv_display_create(480, 320);
-    /*__attribute__((section(".DTCMRAM_section"))) */static lv_color_t buf1[480 * 320 / 30];   
+    /*__attribute__((section(".DTCMRAM_section"))) */static lv_color_t buf1[480 * 320 / 8];   
     lv_display_set_buffers(display, buf1, NULL, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(display, my_disp_flush);
     MainPage main_page;
@@ -48,14 +48,13 @@ extern "C" {
 #endif
 void DMA1_Stream7_IRQHandler(void)
 {
-
     if(LL_DMA_IsActiveFlag_TC7(DMA1))
     {
+        while (!LL_SPI_IsActiveFlag_TXC(SPI1)) {}
         LL_DMA_ClearFlag_TC7(DMA1);
         LL_DMA_DisableStream(DMA1, LL_DMA_STREAM_7);
         LL_SPI_DisableDMAReq_TX(SPI1);
         LL_SPI_ClearFlag_EOT(SPI1);
-        LL_SPI_SuspendMasterTransfer(SPI1);
         LL_SPI_Disable(SPI1);
         lv_display_flush_ready(display);
     }
