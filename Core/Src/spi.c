@@ -19,7 +19,7 @@ spi_init() {
     
     gpio_init.Pin = LL_GPIO_PIN_5 | LL_GPIO_PIN_6 | LL_GPIO_PIN_7;
     gpio_init.Mode = LL_GPIO_MODE_ALTERNATE;
-    gpio_init.Speed = LL_GPIO_SPEED_HIGH;
+    gpio_init.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
     gpio_init.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     gpio_init.Alternate =  LL_GPIO_AF_5;
     LL_GPIO_Init(GPIOA, &gpio_init);
@@ -58,6 +58,7 @@ spi_send_byte(uint8_t byte) {
 void
 spi_send_dma(uint8_t * bytes, uint32_t size) {
     LL_SPI_SetTransferSize(SPI1,0);
+    LL_SPI_EnableDMAReq_TX(SPI1);
     LL_DMA_ConfigTransfer(DMA1,
                         LL_DMA_STREAM_7,
                         LL_DMA_DIRECTION_MEMORY_TO_PERIPH | LL_DMA_PRIORITY_HIGH | LL_DMA_MODE_NORMAL |
@@ -68,7 +69,7 @@ spi_send_dma(uint8_t * bytes, uint32_t size) {
                             (uint32_t)bytes, (uint32_t) &(SPI1->TXDR),
                             LL_DMA_GetDataTransferDirection(DMA1, LL_DMA_STREAM_7));
 
-    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size);
+    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size+6); //WTF??????
     LL_DMA_SetPeriphRequest(DMA1, LL_DMA_STREAM_7, LL_DMAMUX1_REQ_SPI1_TX);
     LL_SPI_Enable(SPI1);
     while (!LL_SPI_IsActiveFlag_TXP(SPI1)) {}
