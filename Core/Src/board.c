@@ -2,6 +2,7 @@
 #include "rcc.h"
 #include "gpio.h"
 #include "spi.h"
+#include "i2c.h"
 #include "pwm.h"
 #include "stm32h7xx_ll_system.h"
 
@@ -13,6 +14,8 @@ board_init(void) {
     gpio_init();
 
     spi_init();
+
+    i2c_init();
 
     pwm_init();
     

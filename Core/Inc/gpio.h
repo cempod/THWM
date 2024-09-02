@@ -16,6 +16,8 @@ extern "C" {
 #define CS_GPIO_Port            GPIOA
 #define BLK_Pin                 LL_GPIO_PIN_1
 #define BLK_GPIO_Port           GPIOA
+#define TRST_Pin                LL_GPIO_PIN_5
+#define TRST_GPIO_Port           GPIOB
 
 void gpio_init(void);
 

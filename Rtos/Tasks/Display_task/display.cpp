@@ -27,9 +27,7 @@ display_task(void* arg) {
     main_page.load();
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
-        //taskENTER_CRITICAL();
         lv_timer_handler();
-        //taskEXIT_CRITICAL();
         vTaskDelay(pdMS_TO_TICKS(5));
     }
 }
@@ -37,8 +35,6 @@ display_task(void* arg) {
 void 
 my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p) {
     st7796_draw_dma(color_p,area->x1,area->y1,area->x2,area->y2);
-    //st7796_draw(color_p,area->x1,area->y1,area->x2,area->y2);
-    //lv_display_flush_ready(disp); 
 }
 
 
