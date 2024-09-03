@@ -21,4 +21,6 @@ gpio_init(void) {
     LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB);
     gpio_init.Pin = TRST_Pin;
     LL_GPIO_Init(TRST_GPIO_Port, &gpio_init);
+
+    LL_GPIO_SetOutputPin(TRST_GPIO_Port, TRST_Pin);
 }

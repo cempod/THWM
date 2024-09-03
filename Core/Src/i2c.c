@@ -4,6 +4,10 @@
 #include "stm32h7xx_ll_bus.h"
 #include "stm32h7xx_ll_i2c.h"
 
+#define I2C_REQUEST_WRITE                       0x00
+#define I2C_REQUEST_READ                        0x01
+#define TOUCH_ADDRESS                           0x70
+
 void
 i2c_init() {
     LL_AHB4_GRP1_EnableClock(LL_AHB4_GRP1_PERIPH_GPIOB);
@@ -33,4 +37,14 @@ i2c_init() {
     i2c_init.OwnAddrSize     = LL_I2C_OWNADDRESS1_7BIT;
 
     LL_I2C_Init(I2C1, &i2c_init);
+}
+
+void
+i2c_write(uint16_t addr,uint8_t *buf, uint16_t bytes_count) {
+    //TODO   
+}
+
+void
+i2c_read(uint16_t addr, uint8_t *buf, uint16_t bytes_count) {
+    //TODO    
 }
