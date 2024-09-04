@@ -4,7 +4,8 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/rtos.c
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/display.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/backlight.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/main_page.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/page_manager.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Main_page/main_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/calendar_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
@@ -18,7 +19,8 @@ target_include_directories(Rtos INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages
-    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Main_page/
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/
     rootlib
 )
 target_compile_definitions(Rtos INTERFACE rootlib)

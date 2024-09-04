@@ -2,7 +2,7 @@
 #include "rtos.h"
 #include "stm32h7xx_ll_gpio.h"
 #include "st7796.h"
-#include "main_page.hpp"
+#include "page_manager.hpp"
 #include "stm32h7xx_ll_spi.h"
 #include "stm32h7xx_ll_dma.h"
 #include "i2c.h"
@@ -43,9 +43,10 @@ display_task(void* arg) {
     lv_indev_t * indev = lv_indev_create();
     lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
     lv_indev_set_read_cb(indev, touch_read);
-    MainPage main_page;
-    //main_page.set_colors(dark_theme);
-    main_page.load();
+    
+    PageManager manager = PageManager::get_manager();
+    manager.load_page(MAIN_PAGE);
+
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
         lv_timer_handler();
