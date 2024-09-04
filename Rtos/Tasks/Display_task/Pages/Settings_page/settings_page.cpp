@@ -5,6 +5,7 @@ SettingsPage::SettingsPage() {
     lv_obj_set_style_bg_color(screen, light_theme.background_color, 0);
     top_panel_p = new TopPanel(470, 45, 5, 5, screen);
     top_panel_p->set_time(12, 30);
+    top_panel_p->set_text("Settings");
 }
 
 void 
