@@ -29,3 +29,9 @@ PageManager::load_page(int page) {
         break;
     }
 }
+
+void
+PageManager::set_colors(ui_style_t colors) {
+    main_page->set_colors(colors);
+    settings_page->set_colors(colors);
+}
