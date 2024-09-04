@@ -1,6 +1,7 @@
 #pragma once
 
 #include "main_page.hpp"
+#include "settings_page.hpp"
 
 enum Pages {
     MAIN_PAGE = 0,
@@ -14,4 +15,5 @@ public:
 private:
   PageManager();
   MainPage * main_page;
+  SettingsPage * settings_page;
 };

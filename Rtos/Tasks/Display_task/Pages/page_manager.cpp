@@ -2,6 +2,7 @@
 
 PageManager::PageManager(){
     main_page = new(MainPage);
+    settings_page = new(SettingsPage);
 }
 
 PageManager& 
@@ -16,6 +17,11 @@ PageManager::load_page(int page) {
     {
     case MAIN_PAGE: {
             main_page->load();
+            break;
+        }
+
+    case SETTINGS_PAGE: {
+            settings_page->load();
             break;
         }
     
