@@ -39,12 +39,25 @@ i2c_init() {
     LL_I2C_Init(I2C1, &i2c_init);
 }
 
-void
-i2c_write(uint16_t addr,uint8_t *buf, uint16_t bytes_count) {
-    //TODO   
+static void
+i2c_write_byte(uint8_t byte) {
+    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {}
+    LL_I2C_HandleTransfer(I2C1,TOUCH_ADDRESS|I2C_REQUEST_WRITE,LL_I2C_ADDRSLAVE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
+    while(!LL_I2C_IsActiveFlag_TXIS) {}
+    LL_I2C_TransmitData8(I2C1, byte);
+    while(!LL_I2C_IsActiveFlag_TXE(I2C1)){}
+    while(!LL_I2C_IsActiveFlag_STOP) {}
+    LL_I2C_ClearFlag_STOP(I2C1);
 }
 
-void
-i2c_read(uint16_t addr, uint8_t *buf, uint16_t bytes_count) {
-    //TODO    
+uint8_t 
+i2c_read_byte(uint16_t addr) {
+    i2c_write_byte(addr);
+    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {}
+    LL_I2C_HandleTransfer(I2C1,TOUCH_ADDRESS|I2C_REQUEST_READ,LL_I2C_ADDRSLAVE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
+    while(!LL_I2C_IsActiveFlag_RXNE(I2C1)){};
+    uint8_t byte = LL_I2C_ReceiveData8(I2C1);
+    while(!LL_I2C_IsActiveFlag_STOP) {}
+    LL_I2C_ClearFlag_STOP(I2C1);
+    return byte;
 }
