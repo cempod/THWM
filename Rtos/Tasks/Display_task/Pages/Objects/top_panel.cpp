@@ -7,7 +7,8 @@ TopPanel::TopPanel(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t 
     lv_obj_set_style_pad_all(panel,0,0);
     time_label_p = new Label(200,0, &lv_font_montserrat_14, panel);
     header_label_p = new Label(0,0, &lv_font_montserrat_14, panel);
-    set_colors(light_theme);
+    ThemeManager theme_manager = ThemeManager::get_manager();
+    set_colors(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void 

@@ -1,5 +1,5 @@
 #pragma once
-#include "display.h"
+#include "theme_manager.hpp"
 #include "label.hpp"
 
 class SensorCard

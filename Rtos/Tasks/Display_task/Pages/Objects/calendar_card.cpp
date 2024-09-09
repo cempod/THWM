@@ -5,7 +5,8 @@ static void remove_events(lv_obj_t * obj);
 
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
     calendar = lv_calendar_create(parrent);
-    set_colors(light_theme); 
+    ThemeManager theme_manager = ThemeManager::get_manager();
+    set_colors(theme_manager.get_theme(LIGHT_THEME)); 
     lv_obj_set_size(calendar, x_size, y_size);
     lv_obj_align(calendar, LV_ALIGN_CENTER, 0, 0);    
     lv_obj_align(calendar, LV_ALIGN_TOP_LEFT, x_offset, y_offset);

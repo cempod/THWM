@@ -1,5 +1,5 @@
 #pragma once
-#include "display.h"
+#include "theme_manager.hpp"
 
 class CalendarCard
 {

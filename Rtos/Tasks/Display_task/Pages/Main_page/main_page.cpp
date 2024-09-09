@@ -2,7 +2,6 @@
 
 MainPage::MainPage() {
     screen = lv_obj_create(NULL);
-    lv_obj_set_style_bg_color(screen, light_theme.background_color, 0);
     temperature_card_p = new SensorCard(150, 150, 5, 55, screen);
     temperature_card_p->set_label("Temperature");
     temperature_card_p->set_data_font(&lv_font_montserrat_44);
@@ -21,6 +20,8 @@ MainPage::MainPage() {
     top_panel_p = new TopPanel(470, 45, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("");
+    ThemeManager theme_manager = ThemeManager::get_manager();
+    set_colors(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void 

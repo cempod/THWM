@@ -2,7 +2,7 @@
 
 SettingsPage::SettingsPage() {
     screen = lv_obj_create(NULL);
-    lv_obj_set_style_bg_color(screen, light_theme.background_color, 0);
+    ThemeManager theme_manager = ThemeManager::get_manager();
     top_panel_p = new TopPanel(470, 45, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("Settings");
@@ -10,7 +10,7 @@ SettingsPage::SettingsPage() {
     lv_obj_set_size(page, 470, 260);
     lv_obj_align(page, LV_ALIGN_CENTER, 0, 25);
     create_menu();
-    set_colors(light_theme);
+    set_colors(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void

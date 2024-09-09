@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.22)
 set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/rtos.c
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/display.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/theme_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Backlight_task/backlight.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/page_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Main_page/main_page.cpp
