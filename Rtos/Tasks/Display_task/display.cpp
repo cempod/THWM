@@ -8,7 +8,6 @@
 #include "i2c.h"
 
 void my_disp_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p);
-lv_display_t *display;
 
 void 
 vApplicationTickHook(void) {
@@ -36,7 +35,7 @@ display_task(void* arg) {
     st7796_init();
     lv_init();
 
-    display = lv_display_create(480, 320);
+    lv_display_t *display = lv_display_create(480, 320);
     static lv_color_t buf1[480 * 320 / 7], buf2[480 * 320 / 7];   
     lv_display_set_buffers(display, buf1, buf2, sizeof(buf1),LV_DISP_RENDER_MODE_PARTIAL);
     lv_display_set_flush_cb(display, my_disp_flush);
@@ -74,7 +73,7 @@ void DMA1_Stream7_IRQHandler(void)
         LL_SPI_DisableDMAReq_TX(SPI1);
         LL_SPI_ClearFlag_EOT(SPI1);
         LL_SPI_Disable(SPI1);
-        lv_display_flush_ready(display);
+        lv_display_flush_ready(lv_display_get_default());
     }
         else if(LL_DMA_IsActiveFlag_TE7(DMA1))
     {
