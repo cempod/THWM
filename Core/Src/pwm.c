@@ -11,14 +11,14 @@ pwm_init(void) {
 
     gpio_init.Pin = BLK_Pin;
     gpio_init.Mode = LL_GPIO_MODE_ALTERNATE;
-    gpio_init.Speed = LL_GPIO_SPEED_FREQ_HIGH;
+    gpio_init.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
     gpio_init.OutputType = LL_GPIO_PULL_NO;
     gpio_init.Alternate =  LL_GPIO_AF_2;
     LL_GPIO_Init(BLK_GPIO_Port, &gpio_init);
 
     LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM5); 
 
-    LL_TIM_SetPrescaler(TIM5, 27500-1);
+    LL_TIM_SetPrescaler(TIM5, 2750-1);
                                             
     LL_TIM_EnableARRPreload(TIM5);
 
