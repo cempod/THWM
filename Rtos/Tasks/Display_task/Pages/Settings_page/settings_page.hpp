@@ -20,9 +20,12 @@ class SettingsPage {
 };
 
 class MenuDisplayPage {
+    private:
+        static void brightness_slider_event_cb(lv_event_t * e);
     public:
         lv_obj_t * page;
         lv_obj_t * label;
+        lv_obj_t * brightness_slider;
 
         MenuDisplayPage(lv_obj_t * menu);
         void set_colors(ui_style_t colors);

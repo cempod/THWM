@@ -1,4 +1,5 @@
 #include "settings_page.hpp"
+#include "rtos.h"
 
 SettingsPage::SettingsPage() {
     screen = lv_obj_create(NULL);
@@ -77,5 +78,17 @@ MenuDisplayPage::MenuDisplayPage(lv_obj_t * menu) {
     lv_obj_set_style_pad_hor(page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     lv_menu_separator_create(page);
     label = lv_label_create(page);
-    lv_label_set_text(label, "TODO");
+    lv_label_set_text(label, "Brightness");
+    brightness_slider = lv_slider_create(page);
+    lv_slider_set_range(brightness_slider, 30, 100);
+    lv_slider_set_value(brightness_slider, 100, LV_ANIM_OFF);//todo: get current from memory
+    lv_obj_center(brightness_slider);
+    lv_obj_add_event_cb(brightness_slider, brightness_slider_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+}
+
+void 
+MenuDisplayPage::brightness_slider_event_cb(lv_event_t * e)
+{
+    lv_obj_t * brightness_slider = (lv_obj_t *)lv_event_get_target(e);
+    xTaskNotify(backlight_task_handle, lv_slider_get_value(brightness_slider), eSetValueWithOverwrite);
 }
