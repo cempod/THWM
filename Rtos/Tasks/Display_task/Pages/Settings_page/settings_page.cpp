@@ -19,30 +19,20 @@ SettingsPage::create_menu() {
     lv_menu_set_mode_root_back_button(menu, LV_MENU_ROOT_BACK_BUTTON_DISABLED);
     lv_obj_update_layout(page);
     lv_obj_set_size(menu, lv_obj_get_content_width(page), lv_obj_get_content_height(page));
-    lv_obj_center(menu);
+    lv_obj_center(menu);    
 
-    lv_obj_t * root_page;
-    lv_obj_t * cont;
-    lv_obj_t * section;
-    lv_obj_t * label;
     
-
-    lv_obj_t * todo_page = lv_menu_page_create(menu, NULL);
-    lv_obj_set_style_pad_hor(todo_page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
-    lv_menu_separator_create(todo_page);
-    label = lv_label_create(todo_page);
-    lv_label_set_text(label, "TODO");
     
-    root_page = lv_menu_page_create(menu, "Main");
-    lv_obj_set_style_pad_hor(root_page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
-    section = lv_menu_section_create(root_page);
-    lv_obj_set_style_border_color(section, LV_COLOR_MAKE(0xF4, 0x43, 0x36), 0);
-    lv_obj_set_style_border_width(section,1,0);
-    add_page_to_menu(section, NULL, "Display", todo_page);
-    add_page_to_menu(section, NULL, "Date & Time", todo_page);
-    add_page_to_menu(section, NULL, "TODO", todo_page);
+    menu_root_page = lv_menu_page_create(menu, "Main");
+    lv_obj_set_style_pad_hor(menu_root_page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
+    menu_main_section = lv_menu_section_create(menu_root_page);
+    lv_obj_set_style_border_width(menu_main_section,1,0);
+    MenuDisplayPage menu_display_page(menu);
+    add_page_to_menu(menu_main_section, NULL, "Display", menu_display_page.page);
+    add_page_to_menu(menu_main_section, NULL, "Date & Time", menu_display_page.page);
+    add_page_to_menu(menu_main_section, NULL, "TODO", menu_display_page.page);
 
-    lv_menu_set_sidebar_page(menu, root_page);
+    lv_menu_set_sidebar_page(menu, menu_root_page);
     lv_obj_send_event(lv_obj_get_child(lv_obj_get_child(lv_menu_get_cur_sidebar_page(menu), 0), 0), LV_EVENT_CLICKED, NULL);
 }
 
@@ -53,6 +43,7 @@ SettingsPage::load(void) {
 
 void
 SettingsPage::set_colors(ui_style_t colors) {
+    lv_obj_set_style_border_color(menu_main_section, colors.border_color, 0);
     lv_obj_set_style_bg_color(screen, colors.background_color, 0);
     lv_obj_set_style_bg_color(page, colors.card_background_color, 0);
     lv_obj_set_style_border_color(page, colors.border_color, 0);
@@ -79,4 +70,12 @@ SettingsPage::add_page_to_menu(lv_obj_t * parent, const char * icon, const char 
     }
 
     lv_menu_set_load_page_event(menu, obj, page_content);
+}
+
+MenuDisplayPage::MenuDisplayPage(lv_obj_t * menu) {
+    page = lv_menu_page_create(menu, NULL);
+    lv_obj_set_style_pad_hor(page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
+    lv_menu_separator_create(page);
+    label = lv_label_create(page);
+    lv_label_set_text(label, "TODO");
 }
