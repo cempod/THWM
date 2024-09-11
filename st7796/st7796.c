@@ -211,6 +211,6 @@ st7796_draw_dma(uint8_t* pixels, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t
 	writecommand(0x2C);
 
 	LL_GPIO_SetOutputPin(DC_GPIO_Port, DC_Pin);
-	swap_bytes(pixels,(x2-x1+1)*(y2-y1+1)*2);
+	//swap_bytes(pixels,(x2-x1+1)*(y2-y1+1)*2);
 	spi_send_dma(pixels,(x2-x1+1)*(y2-y1+1)*2);
 }

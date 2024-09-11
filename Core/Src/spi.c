@@ -44,6 +44,7 @@ spi_init() {
 
 void
 spi_send_byte(uint8_t byte) {
+    LL_SPI_SetDataWidth(SPI1,LL_SPI_DATAWIDTH_8BIT);
     LL_SPI_Enable(SPI1);
     while (!LL_SPI_IsActiveFlag_TXP(SPI1)) {}
     LL_SPI_SetTransferSize(SPI1,sizeof(uint8_t));
@@ -57,19 +58,20 @@ spi_send_byte(uint8_t byte) {
 
 void
 spi_send_dma(uint8_t * bytes, uint32_t size) {
+    LL_SPI_SetDataWidth(SPI1,LL_SPI_DATAWIDTH_16BIT);
     LL_SPI_SetTransferSize(SPI1,0);
     LL_SPI_EnableDMAReq_TX(SPI1);
     LL_DMA_ConfigTransfer(DMA1,
                         LL_DMA_STREAM_7,
                         LL_DMA_DIRECTION_MEMORY_TO_PERIPH | LL_DMA_PRIORITY_HIGH | LL_DMA_MODE_NORMAL |
                         LL_DMA_PERIPH_NOINCREMENT | LL_DMA_MEMORY_INCREMENT |
-                        LL_DMA_PDATAALIGN_BYTE | LL_DMA_MDATAALIGN_BYTE);
+                        LL_DMA_PDATAALIGN_HALFWORD | LL_DMA_MDATAALIGN_HALFWORD);
     LL_DMA_ConfigAddresses(DMA1, 
                             LL_DMA_STREAM_7,
                             (uint32_t)bytes, (uint32_t) &(SPI1->TXDR),
                             LL_DMA_GetDataTransferDirection(DMA1, LL_DMA_STREAM_7));
 
-    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size);
+    LL_DMA_SetDataLength(DMA1, LL_DMA_STREAM_7, size/2);
     LL_DMA_SetPeriphRequest(DMA1, LL_DMA_STREAM_7, LL_DMAMUX1_REQ_SPI1_TX);
     LL_SPI_Enable(SPI1);
     while (!LL_SPI_IsActiveFlag_TXP(SPI1)) {}
