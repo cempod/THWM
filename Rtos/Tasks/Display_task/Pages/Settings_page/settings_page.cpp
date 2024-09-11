@@ -4,7 +4,7 @@
 SettingsPage::SettingsPage() {
     screen = lv_obj_create(NULL);
     ThemeManager theme_manager = ThemeManager::get_manager();
-    top_panel_p = new TopPanel(470, 45, 5, 5, screen);
+    top_panel_p = new TopPanel(470, 40, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("Settings");
     page = lv_obj_create(screen);

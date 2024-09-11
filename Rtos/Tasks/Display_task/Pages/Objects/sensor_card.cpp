@@ -13,7 +13,8 @@ SensorCard::SensorCard(int x_size, int y_size, int x_offset, int y_offset, lv_ob
     lv_obj_set_style_border_side(header, LV_BORDER_SIDE_NONE, 0);
     lv_obj_set_style_radius(header, 0, 0);
     lv_obj_set_style_pad_all(header,0,0);
-    top_label_p = new Label(0,0, &lv_font_montserrat_14, header);
+    LV_FONT_DECLARE(open_sans_18);
+    top_label_p = new Label(0,0, &open_sans_18, header);
     sensor_label_p = new Label(0,17, &lv_font_montserrat_30, card);
     ThemeManager theme_manager = ThemeManager::get_manager();
     set_colors(theme_manager.get_theme(LIGHT_THEME));
