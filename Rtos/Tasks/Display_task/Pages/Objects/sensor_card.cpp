@@ -13,20 +13,20 @@ SensorCard::SensorCard(int x_size, int y_size, int x_offset, int y_offset, lv_ob
     lv_obj_set_style_border_side(header, LV_BORDER_SIDE_NONE, 0);
     lv_obj_set_style_radius(header, 0, 0);
     lv_obj_set_style_pad_all(header,0,0);
-    LV_FONT_DECLARE(open_sans_18);
-    top_label_p = new Label(0,0, &open_sans_18, header);
+    top_label_p = new Label(0,0, &lv_font_montserrat_14, header);
     sensor_label_p = new Label(0,17, &lv_font_montserrat_30, card);
     ThemeManager theme_manager = ThemeManager::get_manager();
-    set_colors(theme_manager.get_theme(LIGHT_THEME));
+    set_theme(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void 
-SensorCard::set_colors(ui_style_t colors) {
-    lv_obj_set_style_bg_color(card, colors.card_background_color, 0);
-    lv_obj_set_style_bg_color (header , colors.header_color, 0);
-    top_label_p->set_color(colors.header_font_color);
-    sensor_label_p->set_color(colors.main_font_color);
-    lv_obj_set_style_border_color(card, colors.border_color, 0);
+SensorCard::set_theme(ui_style_t theme) {
+    lv_obj_set_style_bg_color(card, theme.card_background_color, 0);
+    lv_obj_set_style_bg_color (header , theme.header_color, 0);
+    top_label_p->set_color(theme.header_font_color);
+    top_label_p->set_font(theme.main_font);
+    sensor_label_p->set_color(theme.main_font_color);
+    lv_obj_set_style_border_color(card, theme.border_color, 0);
 }
 
 void 

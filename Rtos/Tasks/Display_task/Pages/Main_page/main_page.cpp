@@ -21,7 +21,7 @@ MainPage::MainPage() {
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("");
     ThemeManager theme_manager = ThemeManager::get_manager();
-    set_colors(theme_manager.get_theme(LIGHT_THEME));
+    set_theme(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void 
@@ -30,12 +30,12 @@ MainPage::load(void) {
 }
 
 void
-MainPage::set_colors(ui_style_t colors) {
-    lv_obj_set_style_bg_color(screen, colors.background_color, 0);
-    temperature_card_p->set_colors(colors);
-    pressure_card_p->set_colors(colors);
-    humidity_card_p->set_colors(colors);
-    co2_card_p->set_colors(colors);
-    calendar_p->set_colors(colors);
-    top_panel_p->set_colors(colors);
+MainPage::set_theme(ui_style_t theme) {
+    lv_obj_set_style_bg_color(screen, theme.background_color, 0);
+    temperature_card_p->set_theme(theme);
+    pressure_card_p->set_theme(theme);
+    humidity_card_p->set_theme(theme);
+    co2_card_p->set_theme(theme);
+    calendar_p->set_theme(theme);
+    top_panel_p->set_theme(theme);
 }

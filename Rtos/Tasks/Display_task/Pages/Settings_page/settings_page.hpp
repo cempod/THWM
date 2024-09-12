@@ -16,7 +16,7 @@ class SettingsPage {
     public:
         SettingsPage();
         void load(void);
-        void set_colors(ui_style_t colors);
+        void set_theme(ui_style_t theme);
 };
 
 class MenuDisplayPage {
@@ -28,5 +28,5 @@ class MenuDisplayPage {
         lv_obj_t * brightness_slider;
 
         MenuDisplayPage(lv_obj_t * menu);
-        void set_colors(ui_style_t colors);
+        void set_theme(ui_style_t theme);
 };

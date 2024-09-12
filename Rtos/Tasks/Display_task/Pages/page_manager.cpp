@@ -31,7 +31,7 @@ PageManager::load_page(int page) {
 }
 
 void
-PageManager::set_colors(ui_style_t colors) {
-    main_page->set_colors(colors);
-    settings_page->set_colors(colors);
+PageManager::set_theme(ui_style_t theme) {
+    main_page->set_theme(theme);
+    settings_page->set_theme(theme);
 }

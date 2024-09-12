@@ -46,7 +46,7 @@ display_task(void* arg) {
     PageManager page_manager = PageManager::get_manager();
     ThemeManager theme_manager = ThemeManager::get_manager();
     page_manager.load_page(MAIN_PAGE);
-    //page_manager.set_colors(theme_manager.get_theme(DARK_THEME));    //example
+    //page_manager.set_theme(theme_manager.get_theme(DARK_THEME));    //example
 
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
@@ -84,4 +84,3 @@ DMA1_Stream7_IRQHandler(void) {
 #ifdef __cplusplus
 }
 #endif
-

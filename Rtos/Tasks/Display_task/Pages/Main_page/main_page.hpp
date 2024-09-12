@@ -17,5 +17,5 @@ private:
 public:
     MainPage();
     void load(void);
-    void set_colors(ui_style_t colors);
+    void set_theme(ui_style_t theme);
 };

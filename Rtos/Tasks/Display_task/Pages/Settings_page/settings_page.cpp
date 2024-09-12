@@ -12,7 +12,7 @@ SettingsPage::SettingsPage() {
     lv_obj_set_size(page, 470, 260);
     lv_obj_align(page, LV_ALIGN_CENTER, 0, 25);
     create_menu();
-    set_colors(theme_manager.get_theme(LIGHT_THEME));
+    set_theme(theme_manager.get_theme(LIGHT_THEME));
 }
 
 void
@@ -44,29 +44,29 @@ SettingsPage::load(void) {
 }
 
 void
-SettingsPage::set_colors(ui_style_t colors) {
-    lv_obj_set_style_border_color(menu_main_section, colors.border_color, 0);
-    lv_obj_set_style_bg_color(screen, colors.background_color, 0);
-    lv_obj_set_style_bg_color(page, colors.card_background_color, 0);
-    lv_obj_set_style_bg_color(menu, colors.card_background_color, 0);
-    lv_obj_set_style_bg_color(menu_main_section, colors.card_background_color, 0);
-    lv_obj_set_style_border_color(page, colors.border_color, 0);
-    lv_obj_set_style_text_color(menu, colors.main_font_color, LV_PART_MAIN);
+SettingsPage::set_theme(ui_style_t theme) {
+    lv_obj_set_style_border_color(menu_main_section, theme.border_color, 0);
+    lv_obj_set_style_bg_color(screen, theme.background_color, 0);
+    lv_obj_set_style_bg_color(page, theme.card_background_color, 0);
+    lv_obj_set_style_bg_color(menu, theme.card_background_color, 0);
+    lv_obj_set_style_bg_color(menu_main_section, theme.card_background_color, 0);
+    lv_obj_set_style_border_color(page, theme.border_color, 0);
+    lv_obj_set_style_text_color(menu, theme.main_font_color, LV_PART_MAIN);
     for (int i = 0; i < lv_obj_get_child_count(menu_main_section); i++)
     {
-        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), colors.main_font_color, LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), colors.header_font_color, LV_PART_MAIN | LV_STATE_CHECKED);
-        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), colors.header_font_color, LV_STATE_PRESSED | LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), colors.header_color, LV_PART_MAIN | LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), colors.header_color, LV_PART_MAIN | LV_STATE_CHECKED);
-        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), colors.header_color, LV_PART_MAIN | LV_STATE_PRESSED);
-        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), colors.header_color, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), theme.main_font_color, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), theme.header_font_color, LV_PART_MAIN | LV_STATE_CHECKED);
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), theme.header_font_color, LV_STATE_PRESSED | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_CHECKED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_PRESSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_main_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_20, LV_PART_MAIN | LV_STATE_PRESSED);
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_80, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_100, LV_PART_MAIN | LV_STATE_CHECKED);
     }
     
-    top_panel_p->set_colors(colors);
+    top_panel_p->set_theme(theme);
 }
 
 void

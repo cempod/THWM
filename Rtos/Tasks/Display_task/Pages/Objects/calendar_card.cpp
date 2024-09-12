@@ -6,7 +6,7 @@ static void remove_events(lv_obj_t * obj);
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
     calendar = lv_calendar_create(parrent);
     ThemeManager theme_manager = ThemeManager::get_manager();
-    set_colors(theme_manager.get_theme(LIGHT_THEME)); 
+    set_theme(theme_manager.get_theme(LIGHT_THEME)); 
     lv_obj_set_size(calendar, x_size, y_size);
     lv_obj_align(calendar, LV_ALIGN_CENTER, 0, 0);    
     lv_obj_align(calendar, LV_ALIGN_TOP_LEFT, x_offset, y_offset);
@@ -79,13 +79,13 @@ draw_task_event_cb(lv_event_t * e)
 }
 
 void 
-CalendarCard::set_colors(ui_style_t colors) {
-    calendar_theme = colors;
-    lv_obj_set_style_bg_color(calendar, colors.card_background_color, 0);
-    lv_obj_set_style_border_color(calendar, colors.border_color, 0);
-    lv_obj_set_style_border_color( lv_calendar_get_btnmatrix(calendar), colors.background_color, LV_PART_ITEMS);
-    lv_obj_set_style_bg_color( lv_calendar_get_btnmatrix(calendar), colors.background_color, LV_PART_ITEMS);
-    lv_obj_set_style_text_color( lv_calendar_get_btnmatrix(calendar), colors.main_font_color, LV_PART_ITEMS);
+CalendarCard::set_theme(ui_style_t theme) {
+    calendar_theme = theme;
+    lv_obj_set_style_bg_color(calendar, theme.card_background_color, 0);
+    lv_obj_set_style_border_color(calendar, theme.border_color, 0);
+    lv_obj_set_style_border_color( lv_calendar_get_btnmatrix(calendar), theme.background_color, LV_PART_ITEMS);
+    lv_obj_set_style_bg_color( lv_calendar_get_btnmatrix(calendar), theme.background_color, LV_PART_ITEMS);
+    lv_obj_set_style_text_color( lv_calendar_get_btnmatrix(calendar), theme.main_font_color, LV_PART_ITEMS);
 }
 
 void 

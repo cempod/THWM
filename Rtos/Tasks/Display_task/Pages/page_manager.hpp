@@ -12,7 +12,7 @@ class PageManager {
 public:
   static PageManager& get_manager();
   void load_page(int page);
-  void set_colors(ui_style_t colors);
+  void set_theme(ui_style_t theme);
 private:
   PageManager();
   MainPage * main_page;
