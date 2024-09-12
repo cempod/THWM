@@ -86,6 +86,7 @@ CalendarCard::set_theme(ui_style_t theme) {
     lv_obj_set_style_border_color( lv_calendar_get_btnmatrix(calendar), theme.background_color, LV_PART_ITEMS);
     lv_obj_set_style_bg_color( lv_calendar_get_btnmatrix(calendar), theme.background_color, LV_PART_ITEMS);
     lv_obj_set_style_text_color( lv_calendar_get_btnmatrix(calendar), theme.main_font_color, LV_PART_ITEMS);
+    lv_obj_set_style_text_font(calendar, theme.small_font, 0);
 }
 
 void 

@@ -13,6 +13,7 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/top_panel.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Fonts/open_sans_18.c
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Fonts/comfortaa_12.c
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Fonts/comfortaa_16.c
 )
 

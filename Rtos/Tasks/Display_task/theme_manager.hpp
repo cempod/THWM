@@ -16,6 +16,7 @@ typedef struct {
     lv_color_t header_font_color;
     lv_color_t border_color;
     const lv_font_t * main_font;
+    const lv_font_t * small_font;
 } ui_style_t;
 
 class ThemeManager {
