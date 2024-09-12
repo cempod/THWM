@@ -16,7 +16,7 @@ MainPage::MainPage() {
     co2_card_p->set_label("CO2");
     co2_card_p->set_data("%dppm",1920);
     calendar_p = new CalendarCard(310, 150, 165, 55, screen);
-    calendar_p->set_date(29, 8, 2024);
+    calendar_p->set_date(12, 9, 2024);
     top_panel_p = new TopPanel(470, 40, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("");

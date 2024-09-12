@@ -5,6 +5,8 @@ static void remove_events(lv_obj_t * obj);
 
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
     calendar = lv_calendar_create(parrent);
+    const char * day_names[7] = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
+    lv_calendar_set_day_names(calendar, day_names);
     ThemeManager theme_manager = ThemeManager::get_manager();
     set_theme(theme_manager.get_theme(LIGHT_THEME)); 
     lv_obj_set_size(calendar, x_size, y_size);
