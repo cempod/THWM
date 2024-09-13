@@ -16,6 +16,7 @@ TopPanel::set_theme(ui_style_t theme) {
     lv_obj_set_style_bg_color(panel, theme.header_color, 0);
     time_label_p->set_color(theme.header_font_color);
     header_label_p->set_color(theme.header_font_color);
+    header_label_p->set_font(theme.main_font);
     lv_obj_set_style_border_color(panel, theme.border_color, 0);
 }
 

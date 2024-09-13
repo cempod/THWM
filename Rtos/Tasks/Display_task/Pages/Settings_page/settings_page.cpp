@@ -6,7 +6,7 @@ SettingsPage::SettingsPage() {
     ThemeManager theme_manager = ThemeManager::get_manager();
     top_panel_p = new TopPanel(470, 40, 5, 5, screen);
     top_panel_p->set_time(12, 30);
-    top_panel_p->set_text("Settings");
+    top_panel_p->set_text("Настройки");
     page = lv_obj_create(screen);
     lv_obj_set_style_pad_all(page,0,0);
     lv_obj_set_size(page, 470, 260);
@@ -25,13 +25,13 @@ SettingsPage::create_menu() {
 
     
     
-    menu_root_page = lv_menu_page_create(menu, "Main");
+    menu_root_page = lv_menu_page_create(menu, "Главное");
     lv_obj_set_style_pad_hor(menu_root_page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     menu_main_section = lv_menu_section_create(menu_root_page);
     lv_obj_set_style_border_width(menu_main_section,1,0);
     MenuDisplayPage menu_display_page(menu);
-    add_page_to_menu(menu_main_section, NULL, "Display", menu_display_page.page);
-    add_page_to_menu(menu_main_section, NULL, "Date & Time", menu_display_page.page);
+    add_page_to_menu(menu_main_section, NULL, "Экран", menu_display_page.page);
+    add_page_to_menu(menu_main_section, NULL, "Дата и время", menu_display_page.page);
     add_page_to_menu(menu_main_section, NULL, "TODO", menu_display_page.page);
 
     lv_menu_set_sidebar_page(menu, menu_root_page);
@@ -52,6 +52,7 @@ SettingsPage::set_theme(ui_style_t theme) {
     lv_obj_set_style_bg_color(menu_main_section, theme.card_background_color, 0);
     lv_obj_set_style_border_color(page, theme.border_color, 0);
     lv_obj_set_style_text_color(menu, theme.main_font_color, LV_PART_MAIN);
+    lv_obj_set_style_text_font(menu, theme.main_font, 0);
     for (int i = 0; i < lv_obj_get_child_count(menu_main_section); i++)
     {
         lv_obj_set_style_text_color(lv_obj_get_child(menu_main_section, i), theme.main_font_color, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -97,7 +98,7 @@ MenuDisplayPage::MenuDisplayPage(lv_obj_t * menu) {
     lv_obj_set_style_pad_hor(page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     lv_menu_separator_create(page);
     label = lv_label_create(page);
-    lv_label_set_text(label, "Brightness");
+    lv_label_set_text(label, "Яркость");
     brightness_slider = lv_slider_create(page);
     lv_slider_set_range(brightness_slider, 30, 100);
     lv_slider_set_value(brightness_slider, 100, LV_ANIM_OFF);//todo: get current from memory
