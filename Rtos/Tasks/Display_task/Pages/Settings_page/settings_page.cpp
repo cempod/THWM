@@ -28,11 +28,11 @@ SettingsPage::create_menu() {
     menu_root_page = lv_menu_page_create(menu, "Главное");
     lv_obj_set_style_pad_hor(menu_root_page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     menu_main_section = lv_menu_section_create(menu_root_page);
-    lv_obj_set_style_border_width(menu_main_section,1,0);
-    MenuDisplayPage menu_display_page(menu);
-    add_page_to_menu(menu_main_section, NULL, "Экран", menu_display_page.page);
-    add_page_to_menu(menu_main_section, NULL, "Дата и время", menu_display_page.page);
-    add_page_to_menu(menu_main_section, NULL, "TODO", menu_display_page.page);
+    lv_obj_set_style_border_width(menu_main_section, 1, 0);
+    menu_display_page_p = new MenuDisplayPage(menu);
+    add_page_to_menu(menu_main_section, NULL, "Экран", menu_display_page_p->page);
+    add_page_to_menu(menu_main_section, NULL, "Дата и время", menu_display_page_p->page);
+    add_page_to_menu(menu_main_section, NULL, "TODO", menu_display_page_p->page);
 
     lv_menu_set_sidebar_page(menu, menu_root_page);
     lv_obj_send_event(lv_obj_get_child(lv_obj_get_child(lv_menu_get_cur_sidebar_page(menu), 0), 0), LV_EVENT_CLICKED, NULL);
@@ -68,13 +68,13 @@ SettingsPage::set_theme(ui_style_t theme) {
     }
     
     top_panel_p->set_theme(theme);
+    menu_display_page_p->set_theme(theme);
 }
 
 void
 SettingsPage::add_page_to_menu(lv_obj_t * parent, const char * icon, const char * page_name, lv_obj_t * page_content) {
     lv_obj_t * obj = lv_menu_cont_create(parent);
     
-
     lv_obj_t * img = NULL;
     lv_obj_t * label = NULL;
 
@@ -97,13 +97,39 @@ MenuDisplayPage::MenuDisplayPage(lv_obj_t * menu) {
     page = lv_menu_page_create(menu, NULL);
     lv_obj_set_style_pad_hor(page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     lv_menu_separator_create(page);
-    label = lv_label_create(page);
-    lv_label_set_text(label, "Яркость");
-    brightness_slider = lv_slider_create(page);
+    lv_obj_set_style_pad_all(page,0,0);
+    brightness_card = lv_obj_create(page);
+    lv_obj_set_style_clip_corner(brightness_card, true, 0);
+    lv_obj_align(brightness_card, LV_ALIGN_TOP_MID, 0, 5);
+    lv_obj_set_size(brightness_card, 310, 100);
+    lv_obj_set_style_pad_all(brightness_card,0,0);
+    lv_obj_set_style_border_width(brightness_card, 1, 0);
+    brightness_card_header = lv_obj_create(brightness_card);
+    lv_obj_set_size(brightness_card_header, 310-2, 35);
+    lv_obj_align(brightness_card_header, LV_ALIGN_TOP_MID, 0, 0);
+    lv_obj_set_style_border_side(brightness_card_header, LV_BORDER_SIDE_NONE, 0);
+    lv_obj_set_style_radius(brightness_card_header, 0, 0);
+    lv_obj_set_style_pad_all(brightness_card_header,0,0);
+    brightness_label_p = new Label(0,0, &lv_font_montserrat_14, brightness_card_header);
+    brightness_label_p->set_text("Яркость");
+    brightness_slider = lv_slider_create(brightness_card);
     lv_slider_set_range(brightness_slider, 30, 100);
     lv_slider_set_value(brightness_slider, 100, LV_ANIM_OFF);//todo: get current from memory
-    lv_obj_center(brightness_slider);
+    lv_obj_align(brightness_slider, LV_ALIGN_CENTER, 0, 17);
     lv_obj_add_event_cb(brightness_slider, brightness_slider_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
+}
+
+void
+MenuDisplayPage::set_theme(ui_style_t theme) {
+    lv_obj_set_style_bg_color(page, theme.background_color, 0);
+    lv_obj_set_style_bg_color(brightness_card, theme.card_background_color, 0);
+    lv_obj_set_style_border_color(brightness_card, theme.border_color, 0);
+    lv_obj_set_style_bg_color(brightness_card_header, theme.header_color, 0);
+    brightness_label_p->set_font(theme.main_font);
+    brightness_label_p->set_color(theme.header_font_color);
+    lv_obj_set_style_bg_color(brightness_slider, theme.header_color, LV_PART_MAIN);
+    lv_obj_set_style_bg_color(brightness_slider, theme.header_color, LV_PART_INDICATOR);
+    lv_obj_set_style_bg_color(brightness_slider, theme.header_color, LV_PART_KNOB);
 }
 
 void 
