@@ -8,6 +8,7 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/page_manager.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Main_page/main_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/settings_page.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/Sub_pages/display_sub_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/calendar_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp
@@ -26,6 +27,7 @@ target_include_directories(Rtos INTERFACE
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Main_page/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/Sub_pages/
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/
     rootlib
 )
