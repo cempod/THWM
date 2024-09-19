@@ -11,6 +11,8 @@ class SettingsPage {
         lv_obj_t * menu;
         lv_obj_t * menu_main_section;
         lv_obj_t * menu_root_page;
+        lv_obj_t * other_section_label;
+        lv_obj_t * menu_other_section;
         DisplaySubPage * display_sub_page_p;
 
         void create_menu(void);

@@ -34,6 +34,17 @@ SettingsPage::create_menu() {
     add_page_to_menu(menu_main_section, NULL, "Дата и время", display_sub_page_p->page);
     add_page_to_menu(menu_main_section, NULL, "TODO", display_sub_page_p->page);
 
+    lv_obj_t * obj = lv_menu_cont_create(menu_root_page);
+    lv_obj_set_style_pad_hor(obj, 0, 0);
+    other_section_label = lv_label_create(obj);
+    lv_label_set_text(other_section_label, "Прочее");
+    lv_label_set_long_mode(other_section_label, LV_LABEL_LONG_SCROLL_CIRCULAR);
+    lv_obj_set_flex_grow(other_section_label, 1);
+
+    menu_other_section = lv_menu_section_create(menu_root_page);
+    lv_obj_set_style_border_width(menu_other_section, 1, 0);
+    add_page_to_menu(menu_other_section, NULL, "Об устройстве", display_sub_page_p->page);
+
     lv_menu_set_sidebar_page(menu, menu_root_page);
     lv_obj_send_event(lv_obj_get_child(lv_obj_get_child(lv_menu_get_cur_sidebar_page(menu), 0), 0), LV_EVENT_CLICKED, NULL);
 }
@@ -46,10 +57,12 @@ SettingsPage::load(void) {
 void
 SettingsPage::set_theme(ui_style_t theme) {
     lv_obj_set_style_border_color(menu_main_section, theme.border_color, 0);
+    lv_obj_set_style_border_color(menu_other_section, theme.border_color, 0);
     lv_obj_set_style_bg_color(screen, theme.background_color, 0);
     lv_obj_set_style_bg_color(page, theme.card_background_color, 0);
     lv_obj_set_style_bg_color(menu, theme.card_background_color, 0);
     lv_obj_set_style_bg_color(menu_main_section, theme.card_background_color, 0);
+    lv_obj_set_style_bg_color(menu_other_section, theme.card_background_color, 0);
     lv_obj_set_style_border_color(page, theme.border_color, 0);
     lv_obj_set_style_text_color(menu, theme.main_font_color, LV_PART_MAIN);
     lv_obj_set_style_text_font(menu, theme.main_font, 0);
@@ -65,6 +78,19 @@ SettingsPage::set_theme(ui_style_t theme) {
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_20, LV_PART_MAIN | LV_STATE_PRESSED);
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_80, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
         lv_obj_set_style_bg_opa(lv_obj_get_child(menu_main_section, i), LV_OPA_100, LV_PART_MAIN | LV_STATE_CHECKED);
+    }
+    for (int i = 0; i < lv_obj_get_child_count(menu_other_section); i++)
+    {
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_other_section, i), theme.main_font_color, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_other_section, i), theme.header_font_color, LV_PART_MAIN | LV_STATE_CHECKED);
+        lv_obj_set_style_text_color(lv_obj_get_child(menu_other_section, i), theme.header_font_color, LV_STATE_PRESSED | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_other_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_other_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_CHECKED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_other_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_PRESSED);
+        lv_obj_set_style_bg_color(lv_obj_get_child(menu_other_section, i), theme.header_color, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_opa(lv_obj_get_child(menu_other_section, i), LV_OPA_20, LV_PART_MAIN | LV_STATE_PRESSED);
+        lv_obj_set_style_bg_opa(lv_obj_get_child(menu_other_section, i), LV_OPA_80, LV_PART_MAIN | LV_STATE_PRESSED | LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_opa(lv_obj_get_child(menu_other_section, i), LV_OPA_100, LV_PART_MAIN | LV_STATE_CHECKED);
     }
     
     top_panel_p->set_theme(theme);
