@@ -30,6 +30,7 @@ SettingsPage::create_menu() {
     menu_main_section = lv_menu_section_create(menu_root_page);
     lv_obj_set_style_border_width(menu_main_section, 1, 0);
     display_sub_page_p = new DisplaySubPage(menu);
+    about_sub_page_p = new AboutSubPage(menu);
     add_page_to_menu(menu_main_section, NULL, "Экран", display_sub_page_p->page);
     add_page_to_menu(menu_main_section, NULL, "Дата и время", display_sub_page_p->page);
     add_page_to_menu(menu_main_section, NULL, "TODO", display_sub_page_p->page);
@@ -43,7 +44,7 @@ SettingsPage::create_menu() {
 
     menu_other_section = lv_menu_section_create(menu_root_page);
     lv_obj_set_style_border_width(menu_other_section, 1, 0);
-    add_page_to_menu(menu_other_section, NULL, "Об устройстве", display_sub_page_p->page);
+    add_page_to_menu(menu_other_section, NULL, "Об устройстве", about_sub_page_p->page);
 
     lv_menu_set_sidebar_page(menu, menu_root_page);
     lv_obj_send_event(lv_obj_get_child(lv_obj_get_child(lv_menu_get_cur_sidebar_page(menu), 0), 0), LV_EVENT_CLICKED, NULL);
@@ -95,6 +96,7 @@ SettingsPage::set_theme(ui_style_t theme) {
     
     top_panel_p->set_theme(theme);
     display_sub_page_p->set_theme(theme);
+    about_sub_page_p->set_theme(theme);
 }
 
 void
