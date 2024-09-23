@@ -29,3 +29,8 @@ void
 TopPanel::set_text(const char* text) {
     header_label_p->set_text(text);
 }
+
+lv_obj_t * 
+TopPanel::get_event_zone(void) {
+    return panel;
+}

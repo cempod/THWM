@@ -13,4 +13,5 @@ public:
     void set_theme(ui_style_t colors);
     void set_time(uint8_t hour, uint8_t minute);
     void set_text(const char* text);
+    lv_obj_t * get_event_zone(void);
 };

@@ -1,4 +1,7 @@
 #include "main_page.hpp"
+#include "page_manager.hpp"
+
+static void top_panel_event_cb(lv_event_t * event);
 
 MainPage::MainPage() {
     screen = lv_obj_create(NULL);
@@ -20,6 +23,7 @@ MainPage::MainPage() {
     top_panel_p = new TopPanel(470, 40, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("");
+    lv_obj_add_event_cb(top_panel_p->get_event_zone(), top_panel_event_cb, LV_EVENT_CLICKED, NULL);
     ThemeManager theme_manager = ThemeManager::get_manager();
     set_theme(theme_manager.get_theme(LIGHT_THEME));
 }
@@ -38,4 +42,11 @@ MainPage::set_theme(ui_style_t theme) {
     co2_card_p->set_theme(theme);
     calendar_p->set_theme(theme);
     top_panel_p->set_theme(theme);
+}
+
+static void 
+top_panel_event_cb(lv_event_t * event)
+{
+    PageManager page_manager = PageManager::get_manager();
+    page_manager.load_page(SETTINGS_PAGE);
 }
