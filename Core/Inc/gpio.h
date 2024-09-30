@@ -12,8 +12,8 @@ extern "C" {
 #define RST_GPIO_Port           GPIOA
 #define DC_Pin                  LL_GPIO_PIN_2
 #define DC_GPIO_Port            GPIOA
-#define CS_Pin                  LL_GPIO_PIN_4
-#define CS_GPIO_Port            GPIOA
+#define CS_Pin                  LL_GPIO_PIN_12
+#define CS_GPIO_Port            GPIOB
 #define BLK_Pin                 LL_GPIO_PIN_1
 #define BLK_GPIO_Port           GPIOA
 #define TRST_Pin                LL_GPIO_PIN_5

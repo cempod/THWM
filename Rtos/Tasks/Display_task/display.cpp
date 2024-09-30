@@ -69,12 +69,12 @@ extern "C" {
 void 
 DMA1_Stream7_IRQHandler(void) {
     if(LL_DMA_IsActiveFlag_TC7(DMA1)) {
-        while (!LL_SPI_IsActiveFlag_TXC(SPI1)) {}
+        while (!LL_SPI_IsActiveFlag_TXC(SPI2)) {}
         LL_DMA_ClearFlag_TC7(DMA1);
         LL_DMA_DisableStream(DMA1, LL_DMA_STREAM_7);
-        LL_SPI_DisableDMAReq_TX(SPI1);
-        LL_SPI_ClearFlag_EOT(SPI1);
-        LL_SPI_Disable(SPI1);
+        LL_SPI_DisableDMAReq_TX(SPI2);
+        LL_SPI_ClearFlag_EOT(SPI2);
+        LL_SPI_Disable(SPI2);
         lv_display_flush_ready(lv_display_get_default());
     } else if(LL_DMA_IsActiveFlag_TE7(DMA1)) {
         while (1) {}
