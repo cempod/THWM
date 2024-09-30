@@ -6,6 +6,7 @@
 #include "stm32h7xx_ll_spi.h"
 #include "stm32h7xx_ll_dma.h"
 #include "i2c.h"
+#include "gpio.h"
 
 void display_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p);
 
@@ -75,6 +76,7 @@ DMA1_Stream7_IRQHandler(void) {
         LL_SPI_DisableDMAReq_TX(SPI2);
         LL_SPI_ClearFlag_EOT(SPI2);
         LL_SPI_Disable(SPI2);
+        LL_GPIO_SetOutputPin(CS_GPIO_Port, CS_Pin);
         lv_display_flush_ready(lv_display_get_default());
     } else if(LL_DMA_IsActiveFlag_TE7(DMA1)) {
         while (1) {}
