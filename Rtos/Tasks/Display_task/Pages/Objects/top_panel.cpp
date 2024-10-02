@@ -22,7 +22,7 @@ TopPanel::set_theme(ui_style_t theme) {
 
 void 
 TopPanel::set_time(uint8_t hour, uint8_t minute) {
-    time_label_p->set_text("%02d:%02d",2, 2);
+    time_label_p->set_text("%02d:%02d",hour, minute);
 }
 
 void 
