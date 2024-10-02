@@ -51,6 +51,7 @@ display_task(void* arg) {
 
     xTaskNotify(backlight_task_handle, 100, eSetValueWithOverwrite);
     while (1) {
+        page_manager.update_pages();
         lv_timer_handler();
         vTaskDelay(pdMS_TO_TICKS(5));
     }

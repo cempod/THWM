@@ -1,5 +1,7 @@
 #include "main_page.hpp"
 #include "page_manager.hpp"
+#include "stm32h7xx_ll_rtc.h"
+#include "stm32h7xx_ll_rcc.h"
 
 static void top_panel_event_cb(lv_event_t * event);
 
@@ -42,6 +44,11 @@ MainPage::set_theme(ui_style_t theme) {
     co2_card_p->set_theme(theme);
     calendar_p->set_theme(theme);
     top_panel_p->set_theme(theme);
+}
+
+void
+MainPage::set_time(void) {
+    top_panel_p->set_time(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)),__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)));
 }
 
 static void 

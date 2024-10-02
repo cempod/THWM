@@ -1,5 +1,7 @@
 #include "settings_page.hpp"
 #include "rtos.h"
+#include "stm32h7xx_ll_rtc.h"
+#include "stm32h7xx_ll_rcc.h"
 
 SettingsPage::SettingsPage() {
     screen = lv_obj_create(NULL);
@@ -97,6 +99,11 @@ SettingsPage::set_theme(ui_style_t theme) {
     top_panel_p->set_theme(theme);
     display_sub_page_p->set_theme(theme);
     about_sub_page_p->set_theme(theme);
+}
+
+void
+SettingsPage::set_time(void) {
+    top_panel_p->set_time(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)),__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)));
 }
 
 void

@@ -18,4 +18,5 @@ public:
     MainPage();
     void load(void);
     void set_theme(ui_style_t theme);
+    void set_time(void);
 };

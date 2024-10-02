@@ -35,3 +35,9 @@ PageManager::set_theme(ui_style_t theme) {
     main_page->set_theme(theme);
     settings_page->set_theme(theme);
 }
+
+void
+PageManager::update_pages(void) {
+    main_page->set_time();
+    settings_page->set_time();
+}

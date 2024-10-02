@@ -13,6 +13,7 @@ public:
   static PageManager& get_manager();
   void load_page(int page);
   void set_theme(ui_style_t theme);
+  void update_pages(void);
 private:
   PageManager();
   MainPage * main_page;
