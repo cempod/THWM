@@ -9,7 +9,7 @@ AboutSubPage::AboutSubPage(lv_obj_t * menu) {
     about_label = lv_label_create(page);
     lv_obj_set_size(about_label, 310, 245);
      lv_obj_set_style_text_align(about_label, LV_TEXT_ALIGN_AUTO, 0);
-    lv_label_set_text(about_label, "THWM - Touch Home Weather Station. \nМетеостанция домашняя. \nИзмеряет температуру и влажность воздуха, атмосферное давление и концентрацию углекислого газа в помещении. \n\nСсылка на проект:\ngithub.com/cempod/THWM");
+    lv_label_set_text(about_label, "THWM - Touch Home Weather Monitor. \nМетеостанция домашняя. \nИзмеряет температуру и влажность воздуха, атмосферное давление и концентрацию углекислого газа в помещении. \n\nСсылка на проект:\ngithub.com/cempod/THWM");
 }
 
 void
