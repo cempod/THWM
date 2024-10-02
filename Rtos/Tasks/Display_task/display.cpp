@@ -7,6 +7,9 @@
 #include "stm32h7xx_ll_dma.h"
 #include "i2c.h"
 #include "gpio.h"
+#include "rtc.h"
+#include "stm32h7xx_ll_rtc.h"
+#include "stm32h7xx_ll_rcc.h"
 
 void display_flush(lv_display_t * disp, const lv_area_t * area, uint8_t * color_p);
 
@@ -43,6 +46,10 @@ display_task(void* arg) {
     lv_indev_t * indev = lv_indev_create();
     lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
     lv_indev_set_read_cb(indev, touch_read);
+
+    if (LL_RCC_LSE_IsReady() == 0) {
+        rtc_init(00, 00, 00);
+    }
     
     PageManager page_manager = PageManager::get_manager();
     ThemeManager theme_manager = ThemeManager::get_manager();
