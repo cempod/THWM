@@ -3,6 +3,7 @@
 #include "stm32h7xx_ll_gpio.h"
 #include "stm32h7xx_ll_bus.h"
 #include "stm32h7xx_ll_i2c.h"
+#include "rtos.h"
 
 #define I2C_REQUEST_WRITE                       0x00
 #define I2C_REQUEST_READ                        0x01
@@ -39,25 +40,72 @@ i2c_init() {
     LL_I2C_Init(I2C1, &i2c_init);
 }
 
-static void
+static uint8_t
+i2c_timeout(uint32_t tick, uint32_t start_tick, uint32_t timeout_ms) {
+    if (tick >= start_tick) {
+        if (pdTICKS_TO_MS(tick - start_tick) > timeout_ms) {
+            return 1;
+        }
+    } else {
+        if (pdTICKS_TO_MS(tick + (UINT32_MAX - start_tick)) > timeout_ms) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+static uint8_t
 i2c_write_byte(uint8_t byte) {
-    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {}
+    uint32_t start_tick = xTaskGetTickCount();
+    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
     LL_I2C_HandleTransfer(I2C1,TOUCH_ADDRESS|I2C_REQUEST_WRITE,LL_I2C_ADDRSLAVE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
-    while(!LL_I2C_IsActiveFlag_TXIS) {}
+    while(!LL_I2C_IsActiveFlag_TXIS) {
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
     LL_I2C_TransmitData8(I2C1, byte);
-    while(!LL_I2C_IsActiveFlag_TXE(I2C1)){}
-    while(!LL_I2C_IsActiveFlag_STOP) {}
+    while(!LL_I2C_IsActiveFlag_TXE(I2C1)){
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
+    while(!LL_I2C_IsActiveFlag_STOP) {
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
     LL_I2C_ClearFlag_STOP(I2C1);
+    return I2C_OK;
 }
 
 uint8_t 
-i2c_read_byte(uint16_t addr) {
-    i2c_write_byte(addr);
-    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {}
+i2c_read_byte(uint16_t addr, uint8_t * byte) {
+    uint32_t start_tick = xTaskGetTickCount();
+    if(i2c_write_byte(addr) == I2C_ERROR) {
+        return I2C_ERROR;
+    }
+    while(LL_I2C_IsActiveFlag_BUSY(I2C1)) {
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
     LL_I2C_HandleTransfer(I2C1,TOUCH_ADDRESS|I2C_REQUEST_READ,LL_I2C_ADDRSLAVE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
-    while(!LL_I2C_IsActiveFlag_RXNE(I2C1)){};
-    uint8_t byte = LL_I2C_ReceiveData8(I2C1);
-    while(!LL_I2C_IsActiveFlag_STOP) {}
+    while(!LL_I2C_IsActiveFlag_RXNE(I2C1)){
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    };
+    *byte = LL_I2C_ReceiveData8(I2C1);
+    while(!LL_I2C_IsActiveFlag_STOP) {
+        if(i2c_timeout(xTaskGetTickCount(), start_tick, 1)) {
+            return I2C_ERROR;
+        }
+    }
     LL_I2C_ClearFlag_STOP(I2C1);
-    return byte;
+    return I2C_OK;
 }

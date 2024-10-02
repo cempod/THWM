@@ -17,17 +17,17 @@ vApplicationTickHook(void) {
 
 static void
 touch_read(lv_indev_t * indev, lv_indev_data_t * data) {
-    if(i2c_read_byte(0x02) != 0) {
-        uint8_t xh = i2c_read_byte(0x03);
-        uint8_t xl = i2c_read_byte(0x04);
-        uint8_t yh = i2c_read_byte(0x05);
-        uint8_t yl = i2c_read_byte(0x06);
+    uint8_t touch, xh, xl, yh, yl;
+    data->state = LV_INDEV_STATE_RELEASED;
 
-        data->point.x = (yh & 0x0F) << 8 | yl;
-        data->point.y = 320 - ((xh & 0x0F) << 8 | xl);
-        data->state = LV_INDEV_STATE_PRESSED;
-    } else {
-        data->state = LV_INDEV_STATE_RELEASED;
+    if(i2c_read_byte(0x02, &touch) == I2C_OK) {
+        if(touch != 0) {
+            if((i2c_read_byte(0x03, &xh) == I2C_OK) && (i2c_read_byte(0x04, &xl) == I2C_OK) && (i2c_read_byte(0x05, &yh) == I2C_OK) && (i2c_read_byte(0x06, &yl) == I2C_OK)) {
+                data->point.x = (yh & 0x0F) << 8 | yl;
+                data->point.y = 320 - ((xh & 0x0F) << 8 | xl);
+                data->state = LV_INDEV_STATE_PRESSED;
+            }
+        }
     }
 }
 
