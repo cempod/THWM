@@ -31,6 +31,13 @@ rtc_init(uint8_t hour, uint8_t minute, uint8_t second) {
         .TimeFormat = LL_RTC_HOURFORMAT_24HOUR
     };
     LL_RTC_TIME_Init(RTC, LL_RTC_FORMAT_BIN, &time);
+    LL_RTC_DateTypeDef date = {
+      .Day = 1,
+      .Month = 1,
+      .WeekDay = LL_RTC_WEEKDAY_MONDAY,
+      .Year = 24
+    };
+    LL_RTC_DATE_Init(RTC, LL_RTC_FORMAT_BIN, &date);
     LL_RTC_DisableInitMode(RTC);
     LL_RTC_EnableWriteProtection(RTC);
 }
