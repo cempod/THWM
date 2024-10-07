@@ -21,7 +21,7 @@ MainPage::MainPage() {
     co2_card_p->set_label("CO2");
     co2_card_p->set_data("%dppm",1920);
     calendar_p = new CalendarCard(310, 150, 165, 55, screen);
-    calendar_p->set_date(12, 9, 2024);
+    calendar_p->set_date(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
     top_panel_p = new TopPanel(470, 40, 5, 5, screen);
     top_panel_p->set_time(12, 30);
     top_panel_p->set_text("");
@@ -49,6 +49,7 @@ MainPage::set_theme(ui_style_t theme) {
 void
 MainPage::set_time(void) {
     top_panel_p->set_time(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC)),__LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetMinute(RTC)));
+    calendar_p->set_date(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
 }
 
 static void 

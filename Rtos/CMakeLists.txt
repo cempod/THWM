@@ -10,6 +10,7 @@ set(SCRS
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/settings_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/Sub_pages/display_sub_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/Sub_pages/about_sub_page.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Settings_page/Sub_pages/date_time_sub_page.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/sensor_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/calendar_card.cpp
     ${CMAKE_CURRENT_LIST_DIR}/Tasks/Display_task/Pages/Objects/label.cpp

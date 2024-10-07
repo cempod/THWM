@@ -5,6 +5,7 @@ static void remove_events(lv_obj_t * obj);
 
 CalendarCard::CalendarCard(int x_size, int y_size, int x_offset, int y_offset, lv_obj_t * parrent) {
     calendar = lv_calendar_create(parrent);
+    lv_obj_remove_flag(lv_calendar_get_btnmatrix(calendar), LV_OBJ_FLAG_CLICKABLE);
     const char * day_names[7] = {"Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"};
     lv_calendar_set_day_names(calendar, day_names);
     ThemeManager theme_manager = ThemeManager::get_manager();
@@ -95,4 +96,9 @@ void
 CalendarCard::set_date(uint32_t day, uint32_t month, uint32_t year) {
     lv_calendar_set_today_date(calendar, year, month, day);
     lv_calendar_set_showed_date(calendar, year, month);
+}
+
+lv_obj_t  *
+CalendarCard::get_calendar_obj(void) {
+    return calendar;
 }
