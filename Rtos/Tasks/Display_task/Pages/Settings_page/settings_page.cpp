@@ -33,9 +33,9 @@ SettingsPage::create_menu() {
     lv_obj_set_style_border_width(menu_main_section, 1, 0);
     display_sub_page_p = new DisplaySubPage(menu);
     about_sub_page_p = new AboutSubPage(menu);
-    date_time_sub_page_p = new DateTimeSubPage(menu);
+    date_sub_page_p = new DateSubPage(menu);
     add_page_to_menu(menu_main_section, NULL, "Экран", display_sub_page_p->page);
-    add_page_to_menu(menu_main_section, NULL, "Дата и время", date_time_sub_page_p->page);
+    add_page_to_menu(menu_main_section, NULL, "Дата", date_sub_page_p->page);
     add_page_to_menu(menu_main_section, NULL, "TODO", display_sub_page_p->page);
 
     lv_obj_t * obj = lv_menu_cont_create(menu_root_page);
@@ -100,7 +100,7 @@ SettingsPage::set_theme(ui_style_t theme) {
     top_panel_p->set_theme(theme);
     display_sub_page_p->set_theme(theme);
     about_sub_page_p->set_theme(theme);
-    date_time_sub_page_p->set_theme(theme);
+    date_sub_page_p->set_theme(theme);
 }
 
 void

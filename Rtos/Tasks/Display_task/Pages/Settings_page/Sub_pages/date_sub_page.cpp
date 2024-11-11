@@ -1,9 +1,9 @@
-#include "date_time_sub_page.hpp"
+#include "date_sub_page.hpp"
 #include "rtos.h"
 #include "stm32h7xx_ll_rtc.h"
 #include "stm32h7xx_ll_rcc.h"
 
-DateTimeSubPage::DateTimeSubPage(lv_obj_t * menu) {
+DateSubPage::DateSubPage(lv_obj_t * menu) {
     page = lv_menu_page_create(menu, NULL);
     lv_obj_set_style_pad_hor(page, lv_obj_get_style_pad_left(lv_menu_get_main_header(menu), 0), 0);
     lv_menu_separator_create(page);
@@ -24,11 +24,11 @@ DateTimeSubPage::DateTimeSubPage(lv_obj_t * menu) {
     calendar_card_label_p->set_text("Настройка даты");
     calendar_p = new CalendarCard(300, 190, 4, 39, calendar_card);
     calendar_p->set_date(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
-    lv_calendar_header_arrow_create(calendar_p->get_calendar_obj());
+    lv_calendar_header_dropdown_create(calendar_p->get_calendar_obj());
 }
 
 void
-DateTimeSubPage::set_theme(ui_style_t theme) {
+DateSubPage::set_theme(ui_style_t theme) {
     lv_obj_set_style_bg_color(page, theme.background_color, 0);
     lv_obj_set_style_bg_color(calendar_card, theme.card_background_color, 0);
     lv_obj_set_style_border_color(calendar_card, theme.border_color, 0);

@@ -4,7 +4,7 @@
 #include "label.hpp"
 #include "calendar_card.hpp"
 
-class DateTimeSubPage {
+class DateSubPage {
     private:
     public:
         lv_obj_t * page;
@@ -13,6 +13,6 @@ class DateTimeSubPage {
         lv_obj_t * calendar_card_header;
         CalendarCard * calendar_p;
 
-        DateTimeSubPage(lv_obj_t * menu);
+        DateSubPage(lv_obj_t * menu);
         void set_theme(ui_style_t theme);
 };
