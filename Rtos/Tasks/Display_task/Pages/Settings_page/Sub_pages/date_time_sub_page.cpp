@@ -11,7 +11,7 @@ DateTimeSubPage::DateTimeSubPage(lv_obj_t * menu) {
     calendar_card = lv_obj_create(page);
     lv_obj_set_style_clip_corner(calendar_card, true, 0);
     lv_obj_align(calendar_card, LV_ALIGN_TOP_MID, 0, 5);
-    lv_obj_set_size(calendar_card, 310, 300);
+    lv_obj_set_size(calendar_card, 310, 235);
     lv_obj_set_style_pad_all(calendar_card,0,0);
     lv_obj_set_style_border_width(calendar_card, 1, 0);
     calendar_card_header = lv_obj_create(calendar_card);
@@ -22,7 +22,7 @@ DateTimeSubPage::DateTimeSubPage(lv_obj_t * menu) {
     lv_obj_set_style_pad_all(calendar_card_header,0,0);
     calendar_card_label_p = new Label(0,0, &lv_font_montserrat_14, calendar_card_header);
     calendar_card_label_p->set_text("Настройка даты");
-    calendar_p = new CalendarCard(300, 255, 5, 40, calendar_card);
+    calendar_p = new CalendarCard(300, 190, 4, 39, calendar_card);
     calendar_p->set_date(__LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetDay(RTC)), __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC)), 2000 + __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC)));
     lv_calendar_header_arrow_create(calendar_p->get_calendar_obj());
 }
